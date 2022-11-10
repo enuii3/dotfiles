@@ -1,94 +1,65 @@
-""""""""""""""""""""""""""""""
-" プラグインのセットアップ
-""""""""""""""""""""""""""""""
-if &compatible
-  set nocompatible
-endif
-" Add the dein installation directory into runtimepath
-set runtimepath+=~/.cache/dein/repos/github.com/Shougo/dein.vim
-
-if dein#load_state('~/.cache/dein')
-  call dein#begin('~/.cache/dein')
-
-  call dein#add('~/.cache/dein/repos/github.com/Shougo/dein.vim')
-  call dein#add('Shougo/deoplete.nvim')
-
+call plug#begin('~/.vim/plugged')
   " ファイルをtree表示してくれる
-  call dein#add('scrooloose/nerdtree')
+  Plug 'scrooloose/nerdtree'
   map <C-n> :NERDTreeToggle<CR>
 
-  " vim起動時にファイルを指定していなければtree表示がされる
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-  source $VIMRUNTIME/macros/matchit.vim
-
   " コーディングを爆速にしてくれる
-  call dein#add('mattn/emmet-vim')
+  Plug 'mattn/emmet-vim'
 
   " コメントON/OFFを手軽に実行
-  call dein#add('tomtom/tcomment_vim')
+  Plug 'tomtom/tcomment_vim'
   " 複数行を一気にコメントアウトできる
-  call dein#add('tpope/vim-commentary')
+  Plug 'tpope/vim-commentary'
+
+  " Python向けの入力補完
+  Plug 'davidhalter/jedi-vim'
 
   " Rails向けのコマンドを提供する
-  call dein#add('tpope/vim-rails')
+  Plug 'tpope/vim-rails'
   " Ruby向けにendを自動挿入してくれる
-  call dein#add('tpope/vim-endwise')
+  Plug 'tpope/vim-endwise'
 
   " Gitの追加/削除/変更された行を行番号の左に表示してくれる
-  call dein#add('airblade/vim-gitgutter')
+  Plug 'airblade/vim-gitgutter'
 
   " vimのsyntaxを強化
-  call dein#add('sheerun/vim-polyglot')
+  Plug 'sheerun/vim-polyglot'
 
   " インデントに色を付けて見やすくする
-  call dein#add('nathanaelkane/vim-indent-guides')
+  Plug 'nathanaelkane/vim-indent-guides'
 
   " 行末の半角スペースを可視化
-  call dein#add('bronson/vim-trailing-whitespace')
+  Plug 'bronson/vim-trailing-whitespace'
 
   " 対応する閉タグを自動生成
-  call dein#add('jiangmiao/auto-pairs')
+  Plug 'jiangmiao/auto-pairs'
 
   " htmlなどの閉じタグを自動生成
-  call dein#add('alvan/vim-closetag')
+  Plug 'alvan/vim-closetag'
   let g:closetag_filenames = '*.html,*.erb,*.vue,*.js'
 
   " javascript用のsyntaxハイライト
-  call dein#add('othree/yajs.vim')
+  Plug 'othree/yajs.vim'
   " javascript開発用プラグイン
-  call dein#add('pangloss/vim-javascript')
+  Plug 'pangloss/vim-javascript'
 
   " vue.js用のsyntaxハイライト
-  call dein#add('posva/vim-vue')
+  Plug 'posva/vim-vue'
 
   "タグや括弧等を編集しやすくする
-  call dein#add('tpope/vim-surround')
-
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
+  Plug 'tpope/vim-surround'
 
   " スニペット
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
 
-  call dein#end()
-  call dein#save_state()
-endif
+call plug#end()
 
-" もし、未インストールものものがあったらインストール
-if dein#check_install()
-  call dein#install()
-endif
 """"""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
 " 各種オプションの設定
 """"""""""""""""""""""""""""""
-" タグファイルの指定(でもタグジャンプは使ったことがない)
-" set tags=~/.tags
 " スワップファイルは使わない(ときどき面倒な警告が出るだけで役に立ったことがない)
 set noswapfile
 " undoファイルは作成しない
@@ -153,7 +124,6 @@ if (has("termguicolors"))
  set termguicolors
 endif
 set background=dark
-" let g:airline_theme = 'tender'
 """
 " コメントの色
 " highlight Comment ctermfg=grey
@@ -169,6 +139,8 @@ set synmaxcol=200
 " G押下時にカラム位置を保持
 set nostartofline
 """"""""""""""""""""""""""""""
+" 置き換え時に大文字小文字を区別しない
+set ignorecase
 
 " grep検索の実行後にQuickFix Listを表示する
 autocmd QuickFixCmdPost *grep* cwindow
@@ -264,3 +236,6 @@ endif
 " filetypeの自動検出(最後の方に書いた方がいいらしい)
 filetype on
 
+"matchitの有効化 ⇨対応するタグジャンプができる様になる"
+
+packadd! matchit

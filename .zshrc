@@ -2,8 +2,7 @@ export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 export PATH="$HOME/.nodebrew/current/bin:$PATH"
 export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.rbenv/bin:$PATH"
-export ANDROID_SDK=/Users/nxxxi/Library/Android/sdk
-export PATH=/Users/nxxxi/Library/Android/sdk/platform-tools:$PATH
+export NODE_OPTIONS="--max-old-space-size=1024"
 eval "$(rbenv init -)"
 
 autoload -Uz vcs_info
@@ -11,6 +10,9 @@ autoload -Uz colors # black red green yellow blue magenta cyan white
 
  # PROMPT変数内で変数参照
 setopt prompt_subst
+
+# zsh: no matches foundの対策
+setopt nonomatch
 
 zstyle ':vcs_info:git:*' check-for-changes true #formats 設定項目で %c,%u が使用可
 zstyle ':vcs_info:git:*' stagedstr "%F{green}!" #commit されていないファイルがある
@@ -62,3 +64,23 @@ setopt list_packed
 setopt correct
 SPROMPT="correct: $RED%R$DEFAULT -> $GREEN%r$DEFAULT ? [Yes/No/Abort/Edit] => "
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/nxxxi/opt/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/nxxxi/opt/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/nxxxi/opt/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/nxxxi/opt/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
