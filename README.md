@@ -11,6 +11,9 @@ https://qiita.com/sff1019/items/3f73856b78d7fa2731c7
 colorscheme iceberg
 ```
 
+vimの背景を透過する設定
+https://techblog.nullstack.engineer/entry/vim_transparent/
+
 deinのインストール方法
 https://dezanari.com/deinvim-install/
 
