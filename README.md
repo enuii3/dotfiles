@@ -1,5 +1,8 @@
 # dotfiles
 
+colorschemeの設定
+https://qiita.com/sff1019/items/3f73856b78d7fa2731c7
+
 deinのインストール方法
 https://dezanari.com/deinvim-install/
 
