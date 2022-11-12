@@ -12,7 +12,7 @@ colorscheme iceberg
 ```
 
 vimの背景を透過する設定
-https://techblog.nullstack.engineer/entry/vim_transparent/
+https://qiita.com/s4kr4/items/b2c1b692ec430fe24f15
 
 deinのインストール方法
 https://dezanari.com/deinvim-install/
