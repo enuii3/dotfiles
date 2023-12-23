@@ -1,23 +1,16 @@
-call plug#begin('~/.vim/plugged')
+""""""""""""""""""""""""""""""
+" Plugの導入
+""""""""""""""""""""""""""""""
+call plug#begin()
   " ファイルをtree表示してくれる
   Plug 'scrooloose/nerdtree'
   map <C-n> :NERDTreeToggle<CR>
 
-  " コーディングを爆速にしてくれる
-  Plug 'mattn/emmet-vim'
-
   " コメントON/OFFを手軽に実行
   Plug 'tomtom/tcomment_vim'
+
   " 複数行を一気にコメントアウトできる
   Plug 'tpope/vim-commentary'
-
-  " Python向けの入力補完
-  Plug 'davidhalter/jedi-vim'
-
-  " Rails向けのコマンドを提供する
-  Plug 'tpope/vim-rails'
-  " Ruby向けにendを自動挿入してくれる
-  Plug 'tpope/vim-endwise'
 
   " Gitの追加/削除/変更された行を行番号の左に表示してくれる
   Plug 'airblade/vim-gitgutter'
@@ -40,6 +33,7 @@ call plug#begin('~/.vim/plugged')
 
   " javascript用のsyntaxハイライト
   Plug 'othree/yajs.vim'
+
   " javascript開発用プラグイン
   Plug 'pangloss/vim-javascript'
 
@@ -53,97 +47,99 @@ call plug#begin('~/.vim/plugged')
   Plug 'Shougo/neosnippet.vim'
   Plug 'Shougo/neosnippet-snippets'
 
+  " vim colorscheme
+  Plug 'jacoborus/tender.vim'
 call plug#end()
-
-""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""
 " 各種オプションの設定
 """"""""""""""""""""""""""""""
-" スワップファイルは使わない(ときどき面倒な警告が出るだけで役に立ったことがない)
-set noswapfile
-" undoファイルは作成しない
-set noundofile
 " カーソルが何行目の何列目に置かれているかを表示する
 set ruler
-" コマンドラインに使われる画面上の行数
-set cmdheight=2
+
 " エディタウィンドウの末尾から2行目にステータスラインを常時表示させる
 set laststatus=2
+
 " ステータス行に表示させる情報の指定(どこからかコピペしたので細かい意味はわかっていない)
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+
 " ステータス行に現在のgitブランチを表示する
 " set statusline+=%{fugitive#statusline()}
+
 " ウインドウのタイトルバーにファイルのパス情報等を表示する
 set title
+
 " コマンドラインモードで<Tab>キーによるファイル名補完を有効にする
 set wildmenu
+
 " 入力中のコマンドを表示する
 set showcmd
+
 " バックアップディレクトリの指定(でもバックアップは使ってない)
 set backupdir=$HOME/.vimbackup
-" バッファで開いているファイルのディレクトリでエクスクローラを開始する(でもエクスプローラって使ってない)
-set browsedir=buffer
-" 小文字のみで検索したときに大文字小文字を無視する
-set smartcase
+
 " 検索結果をハイライト表示する
 set hlsearch
+
 " 暗い背景色に合わせた配色にする
 set background=dark
+
 " タブ入力を複数の空白入力に置き換える
 set expandtab
+
 " 検索ワードの最初の文字を入力した時点で検索を開始する
 set incsearch
+
 " 保存されていないファイルがあるときでも別のファイルを開けるようにする
 set hidden
+
 " 不可視文字を表示する
 set list
+
 " タブと行の続きを可視化する
 set listchars=tab:>\ ,extends:<
+
 " 行番号を表示する
 set number
+
 " 対応する括弧やブレースを表示する
 set showmatch
+
 " 改行時に前の行のインデントを継続する
 set autoindent
+
 " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 set smartindent
+
 " タブ文字の表示幅
 set tabstop=2
+
 " Vimが挿入するインデントの幅
 set shiftwidth=2
+
 " 行頭の余白内で Tab を打ち込むと、'shiftwidth' の数だけインデントする
 set smarttab
+
 " カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
+
 " 構文毎に文字色を変化させる
 syntax enable
 
-" If you have vim >=8.0 or Neovim >= 0.1.5
-if (has("termguicolors"))
- set termguicolors
-endif
 set background=dark
-"""
+
 " コメントの色
-" highlight Comment ctermfg=grey
+hi Comment ctermfg=grey
+
 " 行番号の色
 " highlight LineNr ctermfg=lightblue
+
 " 勝手に改行するのを防ぐ
 " set textwidth=0
 set formatoptions=q
+
 " textwidthでフォーマットさせたくない
 set formatoptions=q
-" クラッシュ防止（http://superuser.com/questions/810622/vim-crashes-freezes-on-specific-files-mac-osx-mavericks）
-set synmaxcol=200
-" G押下時にカラム位置を保持
-set nostartofline
-""""""""""""""""""""""""""""""
-" 置き換え時に大文字小文字を区別しない
-set ignorecase
-
-" grep検索の実行後にQuickFix Listを表示する
-autocmd QuickFixCmdPost *grep* cwindow
 
 " 行頭へ移動
 noremap <C-a> ^
@@ -161,9 +157,11 @@ inoremap <C-j> <Down>
 " ウィンドウを分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
 au FileType unite inoremap <silent> <buffer> <expr> <C-J> unite#do_action('split')
+
 " ウィンドウを縦に分割して開く
 au FileType unite nnoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
 au FileType unite inoremap <silent> <buffer> <expr> <C-K> unite#do_action('vsplit')
+
 " ESCキーを2回押すと終了する
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
@@ -233,9 +231,9 @@ if has("autocmd")
 endif
 """"""""""""""""""""""""""""""
 
+colorscheme tender
+
 " filetypeの自動検出(最後の方に書いた方がいいらしい)
 filetype on
 
-"matchitの有効化 ⇨対応するタグジャンプができる様になる"
 
-packadd! matchit
